@@ -1234,8 +1234,6 @@
 -
   name: 'Simple SSRF'
   category: 'Server-Side Request Forgery'
-  tags:
-    - Network Security
   description: 'Exploit a Server-Side Request Forgery vulnerability to trigger a request to an internal server.'
   difficulty: 2
   hint: 'Look for any user input that triggers a server-side request. Can you redirect this request to a local address?'
