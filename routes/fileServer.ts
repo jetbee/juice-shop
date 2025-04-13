@@ -15,9 +15,9 @@ module.exports = function servePublicFiles () {
   return ({ params, query, headers }: Request, res: Response, next: NextFunction) => {
     const file = params.file
     const host = headers.host
-    var hostname = ""
+    let hostname = ''
     if (host) {
-      hostname = host.split(':')[0]; // ポート番号を削除
+      hostname = host.split(':')[0] // ポート番号を削除
     }
     if (!file.includes('/')) {
       verify(file, hostname, res, next)
@@ -28,7 +28,6 @@ module.exports = function servePublicFiles () {
   }
 
   function verify (file: string, hostname: string, res: Response, next: NextFunction) {
-
     if (file && (hostname === 'localhost' || hostname === '127.0.0.1') || (endsWithAllowlistedFileType(file) || (file === 'incident-support.kdbx'))) {
       file = security.cutOffPoisonNullByte(file)
 
