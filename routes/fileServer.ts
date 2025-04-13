@@ -28,7 +28,7 @@ module.exports = function servePublicFiles () {
   }
 
   function verify (file: string, hostname: string, res: Response, next: NextFunction) {
-    if (file && (hostname === 'localhost' || hostname === '127.0.0.1') || (endsWithAllowlistedFileType(file) || (file === 'incident-support.kdbx'))) {
+    if (file && ((hostname === 'localhost' || hostname === '127.0.0.1') || (endsWithAllowlistedFileType(file) || (file === 'incident-support.kdbx')))) {
       file = security.cutOffPoisonNullByte(file)
 
       challengeUtils.solveIf(challenges.directoryListingChallenge, () => { return file.toLowerCase() === 'acquisitions.md' })

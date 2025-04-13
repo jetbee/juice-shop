@@ -9,7 +9,7 @@ import logger from '../lib/logger'
 
 import { UserModel } from '../models/user'
 import * as utils from '../lib/utils'
-import { notifications, challenges } from '../data/datacache'
+import { challenges } from '../data/datacache'
 import * as challengeUtils from '../lib/challengeUtils'
 const security = require('../lib/insecurity')
 const request = require('request')
