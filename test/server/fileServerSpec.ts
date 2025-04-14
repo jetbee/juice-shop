@@ -19,7 +19,7 @@ describe('fileServer', () => {
 
   beforeEach(() => {
     res = { sendFile: sinon.spy(), status: sinon.spy() }
-    req = { params: {}, query: {} }
+    req = { params: {}, query: {}, headers: { host: 'juice-sh.op' } }
     next = sinon.spy()
     save = () => ({
       then () { }
@@ -48,6 +48,15 @@ describe('fileServer', () => {
     servePublicFiles()(req, res, next)
 
     expect(res.sendFile).to.have.been.calledWith(sinon.match(/ftp[/\\]incident-support\.kdbx/))
+  })
+
+  it('should serve creds.jpg files from folder /ftp if request from local', () => {
+    req.params.file = 'creds.jpg'
+    req.headers.host = '127.0.0.1'
+
+    servePublicFiles()(req, res, next)
+
+    expect(res.sendFile).to.have.been.calledWith(sinon.match(/ftp[/\\]creds\.jpg/))
   })
 
   it('should raise error for slashes in filename', () => {
